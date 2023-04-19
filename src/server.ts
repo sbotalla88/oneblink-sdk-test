@@ -2,6 +2,8 @@ import express, { Request, Response } from 'express';
 import path from 'path';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
+const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
+swaggerUi.setup({ customCssUrl: CSS_URL })
 
 import { RegisterRoutes } from './routes';
 

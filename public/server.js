@@ -39,6 +39,8 @@ const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
+swagger_ui_express_1.default.setup({ customCssUrl: CSS_URL });
 const routes_1 = require("./routes");
 // Create Express server
 const server = (0, express_1.default)();

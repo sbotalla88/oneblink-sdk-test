@@ -1,0 +1,81 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"IJsonResponseSuccess_any_": {
+				"properties": {
+					"status": {
+						"type": "number",
+						"format": "double"
+					},
+					"message": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"data": {}
+				},
+				"required": [
+					"status"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "onblink-sdk",
+		"version": "1.0.0",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/civicplus/forms": {
+			"get": {
+				"operationId": "SearchForms",
+				"responses": {
+					"200": {
+						"description": "Return array of forms",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IJsonResponseSuccess_any_"
+								}
+							}
+						}
+					}
+				},
+				"description": "Search forms",
+				"tags": [
+					"Forms"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "- Optional",
+						"in": "query",
+						"name": "name",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/api"
+		}
+	]
+}

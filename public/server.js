@@ -45,9 +45,9 @@ const server = (0, express_1.default)();
 // Register Middlewares
 server.use((0, cors_1.default)());
 server.set('port', process.env.PORT || 3000);
-server.get('/', (req, res) => {
-    return res.send("API documentation: {server-url}/api/guide");
-});
+// server.get('/', (req, res)=>{
+//     return res.send("API documentation: {server-url}/api/guide");
+// })
 /* Swagger files start */
 server.use('/api/guide', swagger_ui_express_1.default.serve, (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.send(swagger_ui_express_1.default.generateHTML(yield Promise.resolve().then(() => __importStar(require('./swagger.json')))));

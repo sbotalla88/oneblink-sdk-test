@@ -40,7 +40,6 @@ const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
-swagger_ui_express_1.default.setup({ customCssUrl: CSS_URL });
 const routes_1 = require("./routes");
 // Create Express server
 const server = (0, express_1.default)();
@@ -52,7 +51,7 @@ server.set('port', process.env.PORT || 3000);
 // })
 /* Swagger files start */
 server.use('/api/guide', swagger_ui_express_1.default.serve, (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    return res.send(swagger_ui_express_1.default.generateHTML(yield Promise.resolve().then(() => __importStar(require('./swagger.json')))));
+    return res.send(swagger_ui_express_1.default.generateHTML(yield Promise.resolve().then(() => __importStar(require('./swagger.json'))), { customCssUrl: CSS_URL }));
 }));
 /* Swagger files end */
 // Register Public Path

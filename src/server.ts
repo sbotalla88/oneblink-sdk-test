@@ -3,7 +3,6 @@ import path from 'path';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
-swaggerUi.setup({ customCssUrl: CSS_URL })
 
 import { RegisterRoutes } from './routes';
 
@@ -20,7 +19,7 @@ server.set('port', process.env.PORT || 3000);
 
 /* Swagger files start */
 server.use('/api/guide', swaggerUi.serve, async (_req: Request, res: Response) => {
-    return res.send(swaggerUi.generateHTML(await import('./swagger.json')));
+    return res.send(swaggerUi.generateHTML(await import('./swagger.json'), {customCssUrl: CSS_URL}));
 });
 /* Swagger files end */
 

@@ -86,18 +86,72 @@ let FormsController = class FormsController extends tsoa_1.Controller {
             return this.successResponse({ data: result });
         });
     }
+    /**
+     * Get form by id
+     * @path {number} id - Required
+     */
+    getForm(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield this.Forms.getForm(id, false);
+            return this.successResponse({ data: result });
+        });
+    }
+    /**
+     * Create a new form
+     * @param {string} name - Optional
+     */
+    createForm(bodyParam) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield this.Forms.createForm(bodyParam);
+            return this.successResponse({ data: result });
+        });
+    }
+    /**
+     * Create a new form
+     * @param {string} name - Optional
+     */
+    updateForm(bodyParam) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield this.Forms.updateForm(bodyParam, true);
+            return this.successResponse({ data: result });
+        });
+    }
 };
 __decorate([
-    (0, tsoa_1.Get)('forms'),
+    (0, tsoa_1.Get)('search'),
     (0, tsoa_1.SuccessResponse)(http_status_codes_1.default.OK, 'Return array of forms'),
     __param(0, (0, tsoa_1.Query)('name')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], FormsController.prototype, "searchForms", null);
+__decorate([
+    (0, tsoa_1.Get)('{id}'),
+    (0, tsoa_1.SuccessResponse)(http_status_codes_1.default.OK, 'Return array of forms'),
+    __param(0, (0, tsoa_1.Path)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], FormsController.prototype, "getForm", null);
+__decorate([
+    (0, tsoa_1.Post)('create'),
+    (0, tsoa_1.SuccessResponse)(http_status_codes_1.default.OK, 'Return array of forms'),
+    __param(0, (0, tsoa_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], FormsController.prototype, "createForm", null);
+__decorate([
+    (0, tsoa_1.Put)('update'),
+    (0, tsoa_1.SuccessResponse)(http_status_codes_1.default.OK, 'Return array of forms'),
+    __param(0, (0, tsoa_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], FormsController.prototype, "updateForm", null);
 FormsController = __decorate([
     (0, tsoa_1.Tags)('Forms'),
-    (0, tsoa_1.Route)('civicplus'),
+    (0, tsoa_1.Route)('civicplus/forms'),
     __metadata("design:paramtypes", [])
 ], FormsController);
 exports.FormsController = FormsController;

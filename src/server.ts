@@ -13,9 +13,9 @@ const server = express();
 server.use(cors());
 server.set('port', process.env.PORT || 3000);
 
-// server.get('/', (req, res)=>{
-//     return res.send("API documentation: {server-url}/api/guide");
-// })
+server.get('/', (req, res)=>{
+    return res.send("API documentation: {server-url}/api/guide");
+})
 
 /* Swagger files start */
 server.use('/api/guide', swaggerUi.serve, async (_req: Request, res: Response) => {

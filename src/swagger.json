@@ -25,6 +25,104 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"IFormCreationParam": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"formsAppEnvironmentId": {
+						"type": "number",
+						"format": "double"
+					},
+					"description": {
+						"type": "string"
+					},
+					"organisationId": {
+						"type": "string"
+					},
+					"elements": {
+						"items": {},
+						"type": "array"
+					},
+					"isAuthenticated": {
+						"type": "boolean"
+					},
+					"submissionEvents": {
+						"items": {},
+						"type": "array"
+					},
+					"postSubmissionAction": {
+						"type": "string"
+					},
+					"formsAppIds": {
+						"items": {
+							"type": "number",
+							"format": "double"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"name",
+					"formsAppEnvironmentId",
+					"description",
+					"organisationId",
+					"elements",
+					"isAuthenticated",
+					"submissionEvents",
+					"postSubmissionAction",
+					"formsAppIds"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IFormUpdateParam": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"formsAppEnvironmentId": {
+						"type": "number",
+						"format": "double"
+					},
+					"description": {
+						"type": "string"
+					},
+					"organisationId": {
+						"type": "string"
+					},
+					"elements": {
+						"items": {},
+						"type": "array"
+					},
+					"isAuthenticated": {
+						"type": "boolean"
+					},
+					"submissionEvents": {
+						"items": {},
+						"type": "array"
+					},
+					"postSubmissionAction": {
+						"type": "string"
+					},
+					"formsAppIds": {
+						"items": {
+							"type": "number",
+							"format": "double"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -39,7 +137,7 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/civicplus/forms": {
+		"/civicplus/forms/search": {
 			"get": {
 				"operationId": "SearchForms",
 				"responses": {
@@ -70,6 +168,105 @@
 						}
 					}
 				]
+			}
+		},
+		"/civicplus/forms/{id}": {
+			"get": {
+				"operationId": "GetForm",
+				"responses": {
+					"200": {
+						"description": "Return array of forms",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IJsonResponseSuccess_any_"
+								}
+							}
+						}
+					}
+				},
+				"description": "Get form by id",
+				"tags": [
+					"Forms"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
+		"/civicplus/forms/create": {
+			"post": {
+				"operationId": "CreateForm",
+				"responses": {
+					"200": {
+						"description": "Return array of forms",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IJsonResponseSuccess_any_"
+								}
+							}
+						}
+					}
+				},
+				"description": "Create a new form",
+				"tags": [
+					"Forms"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IFormCreationParam"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/civicplus/forms/update": {
+			"put": {
+				"operationId": "UpdateForm",
+				"responses": {
+					"200": {
+						"description": "Return array of forms",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IJsonResponseSuccess_any_"
+								}
+							}
+						}
+					}
+				},
+				"description": "Create a new form",
+				"tags": [
+					"Forms"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IFormUpdateParam"
+							}
+						}
+					}
+				}
 			}
 		}
 	},

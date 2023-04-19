@@ -20,6 +20,39 @@ const models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IFormCreationParam": {
+        "dataType": "refObject",
+        "properties": {
+            "name": { "dataType": "string", "required": true },
+            "formsAppEnvironmentId": { "dataType": "double", "required": true },
+            "description": { "dataType": "string", "required": true },
+            "organisationId": { "dataType": "string", "required": true },
+            "elements": { "dataType": "array", "array": { "dataType": "any" }, "required": true },
+            "isAuthenticated": { "dataType": "boolean", "required": true },
+            "submissionEvents": { "dataType": "array", "array": { "dataType": "any" }, "required": true },
+            "postSubmissionAction": { "dataType": "string", "required": true },
+            "formsAppIds": { "dataType": "array", "array": { "dataType": "double" }, "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IFormUpdateParam": {
+        "dataType": "refObject",
+        "properties": {
+            "id": { "dataType": "double", "required": true },
+            "name": { "dataType": "string" },
+            "formsAppEnvironmentId": { "dataType": "double" },
+            "description": { "dataType": "string" },
+            "organisationId": { "dataType": "string" },
+            "elements": { "dataType": "array", "array": { "dataType": "any" } },
+            "isAuthenticated": { "dataType": "boolean" },
+            "submissionEvents": { "dataType": "array", "array": { "dataType": "any" } },
+            "postSubmissionAction": { "dataType": "string" },
+            "formsAppIds": { "dataType": "array", "array": { "dataType": "double" } },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
 const validationService = new runtime_1.ValidationService(models);
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -28,7 +61,7 @@ function RegisterRoutes(app) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-    app.get('/api/civicplus/forms', ...((0, runtime_1.fetchMiddlewares)(forms_controller_1.FormsController)), ...((0, runtime_1.fetchMiddlewares)(forms_controller_1.FormsController.prototype.searchForms)), function FormsController_searchForms(request, response, next) {
+    app.get('/api/civicplus/forms/search', ...((0, runtime_1.fetchMiddlewares)(forms_controller_1.FormsController)), ...((0, runtime_1.fetchMiddlewares)(forms_controller_1.FormsController.prototype.searchForms)), function FormsController_searchForms(request, response, next) {
         const args = {
             name: { "in": "query", "name": "name", "dataType": "string" },
         };
@@ -38,6 +71,57 @@ function RegisterRoutes(app) {
             validatedArgs = getValidatedArgs(args, request, response);
             const controller = new forms_controller_1.FormsController();
             const promise = controller.searchForms.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.get('/api/civicplus/forms/:id', ...((0, runtime_1.fetchMiddlewares)(forms_controller_1.FormsController)), ...((0, runtime_1.fetchMiddlewares)(forms_controller_1.FormsController.prototype.getForm)), function FormsController_getForm(request, response, next) {
+        const args = {
+            id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new forms_controller_1.FormsController();
+            const promise = controller.getForm.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.post('/api/civicplus/forms/create', ...((0, runtime_1.fetchMiddlewares)(forms_controller_1.FormsController)), ...((0, runtime_1.fetchMiddlewares)(forms_controller_1.FormsController.prototype.createForm)), function FormsController_createForm(request, response, next) {
+        const args = {
+            bodyParam: { "in": "body", "name": "bodyParam", "required": true, "ref": "IFormCreationParam" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new forms_controller_1.FormsController();
+            const promise = controller.createForm.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.put('/api/civicplus/forms/update', ...((0, runtime_1.fetchMiddlewares)(forms_controller_1.FormsController)), ...((0, runtime_1.fetchMiddlewares)(forms_controller_1.FormsController.prototype.updateForm)), function FormsController_updateForm(request, response, next) {
+        const args = {
+            bodyParam: { "in": "body", "name": "bodyParam", "required": true, "ref": "IFormUpdateParam" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new forms_controller_1.FormsController();
+            const promise = controller.updateForm.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
         catch (err) {

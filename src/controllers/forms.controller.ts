@@ -1,10 +1,11 @@
-import { Controller, Route, Security, Get, SuccessResponse, Tags, Query, Request, Post, Body, Deprecated } from 'tsoa';
+import { Controller, Route, Security, Get, SuccessResponse, Tags, Query, Request, Post, Body, Put, Path } from 'tsoa';
 import HttpStatus from 'http-status-codes';
 import * as CivicPlus from '@oneblink/sdk/tenants/civicplus';
-import {IJsonResponseSuccess} from '../types/general'
+import {IJsonResponseSuccess} from '../types/general';
+import {IFormCreationParam, IFormUpdateParam} from "../types/form"
  
 @Tags('Forms')
-@Route('civicplus')
+@Route('civicplus/forms')
 export class FormsController extends Controller {
     Forms: CivicPlus.Forms
     constructor() {
@@ -23,7 +24,7 @@ export class FormsController extends Controller {
      * Search forms
      * @param {string} name - Optional
      */
-    @Get('forms')
+    @Get('search')
     @SuccessResponse(HttpStatus.OK, 'Return array of forms')
     async searchForms(
         @Query('name') name?:string
@@ -35,6 +36,46 @@ export class FormsController extends Controller {
             offset:0
         }
         const result = await this.Forms.searchForms(searchQuery);
+        return this.successResponse({data: result})
+    }
+
+    /**
+     * Get form by id
+     * @path {number} id - Required
+     */
+    @Get('{id}')
+    @SuccessResponse(HttpStatus.OK, 'Return array of forms')
+    async getForm(
+        @Path('id') id:number
+    ):Promise<IJsonResponseSuccess<any>>{
+        const result = await this.Forms.getForm(id, false);
+        return this.successResponse({data: result})
+    }
+
+    /**
+     * Create a new form
+     * @param {string} name - Optional
+     */
+    @Post('create')
+    @SuccessResponse(HttpStatus.OK, 'Return array of forms')
+    async createForm(
+        @Body() bodyParam: IFormCreationParam
+    ):Promise<IJsonResponseSuccess<any>>{
+        
+        const result = await this.Forms.createForm(bodyParam);
+        return this.successResponse({data: result})
+    }
+
+    /**
+     * Create a new form
+     * @param {string} name - Optional
+     */
+    @Put('update')
+    @SuccessResponse(HttpStatus.OK, 'Return array of forms')
+    async updateForm(
+        @Body() bodyParam: IFormUpdateParam
+    ):Promise<IJsonResponseSuccess<any>>{
+        const result = await this.Forms.updateForm(bodyParam, true);
         return this.successResponse({data: result})
     }
 

@@ -63,26 +63,11 @@
                         "type": "array"
                     }
                 },
-                "required": [
-                    "name",
-                    "formsAppEnvironmentId",
-                    "description",
-                    "organisationId",
-                    "elements",
-                    "isAuthenticated",
-                    "submissionEvents",
-                    "postSubmissionAction",
-                    "formsAppIds"
-                ],
                 "type": "object",
                 "additionalProperties": false
             },
             "IFormUpdateParam": {
                 "properties": {
-                    "id": {
-                        "type": "number",
-                        "format": "double"
-                    },
                     "name": {
                         "type": "string"
                     },
@@ -116,6 +101,10 @@
                             "format": "double"
                         },
                         "type": "array"
+                    },
+                    "id": {
+                        "type": "number",
+                        "format": "double"
                     }
                 },
                 "required": [
@@ -251,7 +240,7 @@
                         }
                     }
                 },
-                "description": "Create a new form",
+                "description": "Update a new form",
                 "tags": [
                     "Forms"
                 ],

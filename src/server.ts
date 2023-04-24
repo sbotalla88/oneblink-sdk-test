@@ -11,6 +11,8 @@ const server = express();
 
 // Register Middlewares
 server.use(cors());
+server.use(express.json({ limit: '100mb' }));
+server.use(express.urlencoded({ extended: false, limit: '100mb' }));
 server.set('port', process.env.PORT || 3000);
 
 server.get('/', (req, res)=>{

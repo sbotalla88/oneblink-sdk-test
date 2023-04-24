@@ -45,6 +45,8 @@ const routes_1 = require("./routes");
 const server = (0, express_1.default)();
 // Register Middlewares
 server.use((0, cors_1.default)());
+server.use(express_1.default.json({ limit: '100mb' }));
+server.use(express_1.default.urlencoded({ extended: false, limit: '100mb' }));
 server.set('port', process.env.PORT || 3000);
 server.get('/', (req, res) => {
     return res.send("API documentation: {server-url}/api/guide");

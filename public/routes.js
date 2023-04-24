@@ -23,23 +23,6 @@ const models = {
     "IFormCreationParam": {
         "dataType": "refObject",
         "properties": {
-            "name": { "dataType": "string", "required": true },
-            "formsAppEnvironmentId": { "dataType": "double", "required": true },
-            "description": { "dataType": "string", "required": true },
-            "organisationId": { "dataType": "string", "required": true },
-            "elements": { "dataType": "array", "array": { "dataType": "any" }, "required": true },
-            "isAuthenticated": { "dataType": "boolean", "required": true },
-            "submissionEvents": { "dataType": "array", "array": { "dataType": "any" }, "required": true },
-            "postSubmissionAction": { "dataType": "string", "required": true },
-            "formsAppIds": { "dataType": "array", "array": { "dataType": "double" }, "required": true },
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "IFormUpdateParam": {
-        "dataType": "refObject",
-        "properties": {
-            "id": { "dataType": "double", "required": true },
             "name": { "dataType": "string" },
             "formsAppEnvironmentId": { "dataType": "double" },
             "description": { "dataType": "string" },
@@ -49,6 +32,23 @@ const models = {
             "submissionEvents": { "dataType": "array", "array": { "dataType": "any" } },
             "postSubmissionAction": { "dataType": "string" },
             "formsAppIds": { "dataType": "array", "array": { "dataType": "double" } },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IFormUpdateParam": {
+        "dataType": "refObject",
+        "properties": {
+            "name": { "dataType": "string" },
+            "formsAppEnvironmentId": { "dataType": "double" },
+            "description": { "dataType": "string" },
+            "organisationId": { "dataType": "string" },
+            "elements": { "dataType": "array", "array": { "dataType": "any" } },
+            "isAuthenticated": { "dataType": "boolean" },
+            "submissionEvents": { "dataType": "array", "array": { "dataType": "any" } },
+            "postSubmissionAction": { "dataType": "string" },
+            "formsAppIds": { "dataType": "array", "array": { "dataType": "double" } },
+            "id": { "dataType": "double", "required": true },
         },
         "additionalProperties": false,
     },

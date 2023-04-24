@@ -36,7 +36,7 @@ export class FormsController extends Controller {
             offset:0
         }
         const result = await this.Forms.searchForms(searchQuery);
-        return this.successResponse({data: result})
+        return this.renderResponse({data: result})
     }
 
     /**
@@ -49,7 +49,7 @@ export class FormsController extends Controller {
         @Path('id') id:number
     ):Promise<IJsonResponseSuccess<any>>{
         const result = await this.Forms.getForm(id, false);
-        return this.successResponse({data: result})
+        return this.renderResponse({data: result})
     }
 
     /**
@@ -61,13 +61,16 @@ export class FormsController extends Controller {
     async createForm(
         @Body() bodyParam: IFormCreationParam
     ):Promise<IJsonResponseSuccess<any>>{
-        
-        const result = await this.Forms.createForm(bodyParam);
-        return this.successResponse({data: result})
+        try {
+            const result = await this.Forms.createForm(bodyParam);
+            return this.renderResponse({data: result})
+        } catch (error) {
+            return this.renderResponse({error, status: HttpStatus.BAD_REQUEST})
+        }
     }
 
     /**
-     * Create a new form
+     * Update a new form
      * @param {string} name - Optional
      */
     @Put('update')
@@ -75,9 +78,16 @@ export class FormsController extends Controller {
     async updateForm(
         @Body() bodyParam: IFormUpdateParam
     ):Promise<IJsonResponseSuccess<any>>{
-        const result = await this.Forms.updateForm(bodyParam, true);
-        return this.successResponse({data: result})
+        try {
+            const result = await this.Forms.updateForm(bodyParam);
+            return this.renderResponse({data: result});
+        } catch (error) {
+            return this.renderResponse({error, status: HttpStatus.BAD_REQUEST})
+        }
+       
     }
+
+    
 
     /**
      * Success Response
@@ -85,19 +95,22 @@ export class FormsController extends Controller {
      * @param param0
      * @returns
      */
-    successResponse = <T = any>({
+    renderResponse = <T = any>({
         status = HttpStatus.OK,
         message,
         data,
+        error
     }: {
         status?: number;
         message?: string;
         data?: T;
+        error?: any;
     } = {}): IJsonResponseSuccess<T> => {
         return {
             status,
             ...(message?{message}:{}),
             ...(data ? { data } : {}),
+            ...(error ? { error } : {}),
         };
     };
 }

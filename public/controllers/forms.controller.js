@@ -61,8 +61,8 @@ let FormsController = class FormsController extends tsoa_1.Controller {
          * @param param0
          * @returns
          */
-        this.successResponse = ({ status = http_status_codes_1.default.OK, message, data, } = {}) => {
-            return Object.assign(Object.assign({ status }, (message ? { message } : {})), (data ? { data } : {}));
+        this.renderResponse = ({ status = http_status_codes_1.default.OK, message, data, error } = {}) => {
+            return Object.assign(Object.assign(Object.assign({ status }, (message ? { message } : {})), (data ? { data } : {})), (error ? { error } : {}));
         };
         const options = {
             accessKey: (_a = process.env.CIVIC_PLUS_KEY_ID) !== null && _a !== void 0 ? _a : '',
@@ -83,7 +83,7 @@ let FormsController = class FormsController extends tsoa_1.Controller {
                 offset: 0
             };
             const result = yield this.Forms.searchForms(searchQuery);
-            return this.successResponse({ data: result });
+            return this.renderResponse({ data: result });
         });
     }
     /**
@@ -93,7 +93,7 @@ let FormsController = class FormsController extends tsoa_1.Controller {
     getForm(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield this.Forms.getForm(id, false);
-            return this.successResponse({ data: result });
+            return this.renderResponse({ data: result });
         });
     }
     /**
@@ -102,18 +102,28 @@ let FormsController = class FormsController extends tsoa_1.Controller {
      */
     createForm(bodyParam) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield this.Forms.createForm(bodyParam);
-            return this.successResponse({ data: result });
+            try {
+                const result = yield this.Forms.createForm(bodyParam);
+                return this.renderResponse({ data: result });
+            }
+            catch (error) {
+                return this.renderResponse({ error, status: http_status_codes_1.default.BAD_REQUEST });
+            }
         });
     }
     /**
-     * Create a new form
+     * Update a new form
      * @param {string} name - Optional
      */
     updateForm(bodyParam) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield this.Forms.updateForm(bodyParam, true);
-            return this.successResponse({ data: result });
+            try {
+                const result = yield this.Forms.updateForm(bodyParam);
+                return this.renderResponse({ data: result });
+            }
+            catch (error) {
+                return this.renderResponse({ error, status: http_status_codes_1.default.BAD_REQUEST });
+            }
         });
     }
 };
